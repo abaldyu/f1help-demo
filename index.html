@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Центр компьютерной помощи — запись на ремонт онлайн, Петрозаводск</title>
+<meta name="description" content="Ремонт телефонов, ноутбуков, компьютеров и принтеров в Петрозаводске. Цена за 10 секунд, запись на удобное время онлайн, статус ремонта по номеру квитанции.">
+<meta property="og:title" content="Центр компьютерной помощи — запись на ремонт онлайн">
+<meta property="og:description" content="Цена за 10 секунд, запись на время без звонка, статус ремонта по номеру квитанции.">
+<meta name="theme-color" content="#0f1729">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=PT+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef1f5; --card:#ffffff; --ink:#0f1729; --ink2:#2b3447; --mute:#5d6779; --line:#d7dde6; --soft:#f5f7fa;
+  --acc:#ff5a1f; --acc-ink:#fff; --acc-soft:#fff1eb;
+  --ok:#11a150; --ok-soft:#e7f7ee; --warn:#e69b00; --warn-soft:#fff6de; --info:#2563eb; --info-soft:#e9f0ff;
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 Rubik,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit}
+button,input,select{font:inherit;color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding:0 16px}
+.mono{font-family:"PT Mono",ui-monospace,monospace}
+:focus-visible{outline:3px solid var(--info);outline-offset:2px;border-radius:6px}
+
+/* шапка */
+.top{position:sticky;top:0;z-index:20;background:rgba(238,241,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.mark{width:36px;height:36px;border-radius:10px;background:var(--ink);display:grid;place-items:center;flex:none}
+.brand b{display:block;font-weight:700;font-size:15px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand small{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mute)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px #11a15026;flex:none}
+.dot.off{background:#c43a2b;box-shadow:0 0 0 3px #c43a2b26}
+.nav{display:flex;gap:6px;align-items:center}
+.nav a.l{font-size:14px;color:var(--ink2);text-decoration:none;padding:8px 10px;border-radius:8px}
+.nav a.l:hover{background:#fff}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;font-size:15px;padding:10px 16px;border-radius:999px;white-space:nowrap}
+
+/* первый экран */
+.hero{display:grid;grid-template-columns:1.02fr 1fr;gap:48px;padding-top:52px;padding-bottom:64px;align-items:start}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--ink2);background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px 6px 8px}
+.kicker i{font-style:normal;background:var(--acc);color:#fff;border-radius:999px;font-size:11px;font-weight:700;padding:2px 8px}
+h1{font-size:clamp(38px,5.6vw,68px);line-height:.98;letter-spacing:-.035em;font-weight:800;margin-top:18px}
+h1 span{color:var(--acc)}
+.lead{margin-top:20px;font-size:19px;color:var(--ink2);max-width:33ch}
+.proof{margin-top:30px;display:grid;grid-template-columns:repeat(3,auto);gap:0;justify-content:start;border:1px solid var(--line);border-radius:var(--r);background:#fff;overflow:hidden;width:max-content;max-width:100%}
+.proof div{padding:12px 18px;border-right:1px solid var(--line)}
+.proof div:last-child{border-right:0}
+.proof b{display:block;font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.proof small{font-size:12px;color:var(--mute)}
+.feat{margin-top:26px;display:grid;gap:10px;list-style:none}
+.feat li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--ink2)}
+.feat li svg{flex:none;margin-top:2px}
+
+/* приложение записи */
+.app{background:var(--card);border-radius:22px;box-shadow:0 1px 0 var(--line),0 24px 60px -20px #0f172938;border:1px solid var(--line);overflow:hidden;scroll-margin-top:80px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;padding:6px;gap:6px;background:var(--soft);border-bottom:1px solid var(--line)}
+.tab{border:0;background:transparent;border-radius:10px;padding:11px 8px;font-weight:600;font-size:15px;cursor:pointer;color:var(--mute)}
+.tab[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 3px #0f172922}
+.pane{padding:22px 22px 24px}
+.pane[hidden]{display:none}
+.progress{display:flex;gap:6px;margin-bottom:18px}
+.progress span{flex:1;height:4px;border-radius:4px;background:var(--line);transition:background .25s}
+.progress span.on{background:var(--acc)}
+.q{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;gap:10px}
+.q h3{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.q button{border:0;background:none;color:var(--mute);font-size:14px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tile{display:flex;align-items:center;gap:12px;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:14px;cursor:pointer;font-weight:600;font-size:16px;transition:border-color .15s,background .15s}
+.tile:hover{border-color:var(--ink)}
+.tile svg{flex:none}
+.tile small{display:block;font-weight:400;font-size:12px;color:var(--mute)}
+.list{display:grid;gap:8px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .15s}
+.row:hover{border-color:var(--ink)}
+.row b{font-weight:500}
+.row span{white-space:nowrap;font-weight:700}
+.row small{display:block;font-size:12px;color:var(--mute);font-weight:400}
+.sum{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--acc-soft);border-radius:12px;padding:12px 14px;margin-bottom:16px;font-size:14px}
+.sum b{font-size:18px}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin:0 -2px 14px;scrollbar-width:none}
+.days::-webkit-scrollbar{display:none}
+.day{flex:none;width:64px;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:8px 0;text-align:center;cursor:pointer}
+.day small{display:block;font-size:12px;color:var(--mute)}
+.day b{font-size:20px;line-height:1.2}
+.day[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.day[aria-pressed="true"] small{color:#c9d0dc}
+.slots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.slot{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:10px 0;cursor:pointer;font-weight:500;font-size:15px}
+.slot:disabled{background:var(--soft);color:#a6aebb;text-decoration:line-through;cursor:not-allowed;border-color:transparent}
+.slot[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#fff}
+.where{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0 0}
+.where button{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:10px;cursor:pointer;font-size:14px;font-weight:500}
+.where button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.field{display:grid;gap:6px;margin-bottom:12px}
+.field label{font-size:13px;color:var(--mute);font-weight:500}
+.field input{border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;font-size:16px;background:#fff;width:100%}
+.field input:focus{outline:none;border-color:var(--ink)}
+.field input[aria-invalid="true"]{border-color:#c43a2b}
+.agree{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--mute);margin:4px 0 14px}
+.agree input{margin-top:3px;width:18px;height:18px;accent-color:var(--acc);flex:none}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:0;border-radius:12px;background:var(--acc);color:var(--acc-ink);font-weight:700;font-size:17px;padding:16px;cursor:pointer;text-decoration:none}
+.cta:disabled{background:#f3b9a3;cursor:not-allowed}
+.cta.dark{background:var(--ink)}
+.hint{font-size:12px;color:var(--mute);margin-top:10px;text-align:center}
+.err{color:#c43a2b;font-size:13px;margin:-4px 0 10px;min-height:0}
+
+/* квитанция */
+.receipt{border:1.5px dashed var(--line);border-radius:14px;padding:18px;background:var(--soft);position:relative}
+.receipt .ok{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;color:var(--ok);margin-bottom:12px}
+.receipt dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14px}
+.receipt dt{color:var(--mute)}
+.receipt dd{font-weight:500;text-align:right}
+.big-num{font-size:34px;font-weight:800;letter-spacing:.02em;line-height:1}
+.receipt .numrow{display:flex;justify-content:space-between;align-items:end;border-bottom:1.5px dashed var(--line);padding-bottom:12px;margin-bottom:12px}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.ghost{border:1.5px solid var(--ink);background:#fff;border-radius:12px;padding:12px;font-weight:600;cursor:pointer;font-size:15px}
+
+/* статус */
+.find{display:flex;gap:8px}
+.find input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:18px;font-family:"PT Mono",monospace;letter-spacing:.06em}
+.find input:focus{outline:none;border-color:var(--ink)}
+.find button{border:0;background:var(--ink);color:#fff;border-radius:12px;padding:0 18px;font-weight:600;cursor:pointer}
+.try{font-size:13px;color:var(--mute);margin-top:10px}
+.try button{border:0;background:var(--soft);border-radius:6px;padding:2px 8px;font-family:"PT Mono",monospace;cursor:pointer;color:var(--ink)}
+.track{margin-top:20px}
+.track h4{font-size:17px;margin-bottom:2px}
+.track .sub{font-size:14px;color:var(--mute);margin-bottom:16px}
+.steps{list-style:none;position:relative;display:grid;gap:14px}
+.steps li{display:flex;gap:12px;align-items:flex-start;position:relative}
+.steps li::before{content:"";position:absolute;left:11px;top:26px;bottom:-14px;width:2px;background:var(--line)}
+.steps li:last-child::before{display:none}
+.steps li.done::before{background:var(--ok)}
+.steps .b{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);background:#fff;flex:none;display:grid;place-items:center;position:relative;z-index:1}
+.steps li.done .b{background:var(--ok);border-color:var(--ok)}
+.steps li.now .b{border-color:var(--acc);box-shadow:0 0 0 4px #ff5a1f2e}
+.steps li.now .b::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--acc)}
+.steps b{font-weight:600;font-size:15px}
+.steps small{display:block;font-size:13px;color:var(--mute)}
+.steps li.todo b{color:#9aa3b2;font-weight:500}
+.ready{margin-top:16px;background:var(--ok-soft);color:#0b6b36;border-radius:12px;padding:12px 14px;font-size:14px}
+
+/* секции */
+section{padding:72px 0;scroll-margin-top:62px}
+.eyebrow{font:14px "PT Mono",monospace;color:var(--acc);letter-spacing:.04em;text-transform:uppercase}
+h2{font-size:clamp(30px,4.2vw,48px);letter-spacing:-.03em;line-height:1.02;margin:10px 0 14px;font-weight:800}
+.sec-lead{font-size:18px;color:var(--ink2);max-width:52ch}
+
+/* кабинет мастера */
+.admin-sec{background:var(--ink);color:#e9edf3}
+.admin-sec .sec-lead{color:#aeb7c6}
+.admin-head{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;margin-bottom:28px}
+.admin-head .note{background:#1c2639;border:1px solid #2c3850;border-radius:12px;padding:12px 14px;font-size:14px;color:#c8d0dc;max-width:330px}
+.admin-head .note b{color:#fff}
+.laptop{background:#1c2639;border-radius:18px;padding:10px;border:1px solid #2c3850}
+.screen{background:#fff;color:var(--ink);border-radius:10px;overflow:hidden}
+.chrome{display:flex;align-items:center;gap:6px;padding:9px 12px;background:var(--soft);border-bottom:1px solid var(--line)}
+.chrome i{width:10px;height:10px;border-radius:50%;background:#d7dde6}
+.chrome span{margin-left:10px;font:12px "PT Mono",monospace;color:var(--mute);background:#fff;border:1px solid var(--line);border-radius:6px;padding:3px 10px;flex:1;max-width:340px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.dash{padding:18px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kpi small{font-size:12px;color:var(--mute)}
+.kpi b{display:block;font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.orders{display:grid;gap:8px}
+.order{display:grid;grid-template-columns:70px 1.4fr 1fr 150px 128px;gap:12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;transition:background .4s}
+.order.new{background:var(--acc-soft);border-color:#ffc4ad}
+.order .n{font-family:"PT Mono",monospace;font-weight:700}
+.order .who small,.order .what small{display:block;color:var(--mute);font-size:12px}
+.badge{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.s0{background:var(--info-soft);color:var(--info)}
+.s1{background:var(--warn-soft);color:#a26d00}
+.s2{background:#f3e8ff;color:#7c3aed}
+.s3{background:var(--acc-soft);color:#c2410c}
+.s4{background:var(--ok-soft);color:#0b7a3d}
+.next{border:1.5px solid var(--ink);background:#fff;border-radius:10px;padding:7px 10px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.next:disabled{border-color:var(--line);color:#a6aebb;cursor:default}
+.tag-new{display:inline-block;background:var(--acc);color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:2px}
+.empty{font-size:13px;color:var(--mute);margin-top:12px}
+
+/* цены */
+.prices{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+.pcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.pcard h3{display:flex;align-items:center;gap:10px;font-size:20px;margin-bottom:10px}
+.pcard ul{list-style:none}
+.pcard li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:15px}
+.pcard li span{white-space:nowrap;font-weight:600}
+.pnote{margin-top:14px;font-size:13px;color:var(--mute)}
+
+/* выезд + контакты */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
+.box{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.box h3{font-size:22px;margin-bottom:8px;letter-spacing:-.01em}
+.box p{color:var(--ink2)}
+.checks{list-style:none;display:grid;gap:8px;margin-top:14px}
+.checks li{display:flex;gap:10px;font-size:15px}
+.checks li::before{content:"→";color:var(--acc);font-weight:700}
+.contact-line{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:15px}
+.contact-line:first-of-type{border-top:0}
+.contact-line span{color:var(--mute)}
+.contact-line b{font-weight:500;text-align:right}
+.box .cta{margin-top:16px}
+
+footer{padding:28px 0 100px;font-size:13px;color:var(--mute);border-top:1px solid var(--line)}
+
+/* уведомление мастеру */
+.toast{position:fixed;right:16px;top:76px;z-index:40;width:min(340px,calc(100vw - 32px));background:#fff;border-radius:16px;box-shadow:0 18px 50px -12px #0f172955;border:1px solid var(--line);padding:12px 14px;display:flex;gap:12px;transform:translateY(-12px);opacity:0;pointer-events:none;transition:.3s}
+.toast.show{transform:none;opacity:1}
+.toast .ic{width:38px;height:38px;border-radius:10px;background:#2aabee;display:grid;place-items:center;flex:none}
+.toast b{font-size:14px;display:block}
+.toast p{font-size:13px;color:var(--ink2);line-height:1.35}
+.toast small{font-size:11px;color:var(--mute)}
+
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:none;gap:8px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--line)}
+.bar a{flex:1;text-align:center;padding:13px;border-radius:12px;font-weight:700;text-decoration:none}
+.bar .b1{background:var(--soft);border:1px solid var(--line)}
+.bar .b2{background:var(--acc);color:#fff}
+
+@media (max-width:960px){
+  .order{grid-template-columns:60px 1fr auto;grid-template-areas:"n who st" "n what btn"}
+  .order .n{grid-area:n;align-self:start}
+  .order .who{grid-area:who}.order .what{grid-area:what}
+  .order .st{grid-area:st;justify-self:end}.order .act{grid-area:btn;justify-self:end}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:34px;padding-top:30px}
+  .nav a.l{display:none}
+  .admin-head,.split,.prices{grid-template-columns:1fr}
+  .admin-head .note{max-width:none}
+  .bar{display:flex}
+  .pill{display:none}
+}
+@media (max-width:520px){
+  .pane{padding:18px 16px 20px}
+  .slots{grid-template-columns:repeat(3,1fr)}
+  .tile{padding:12px;font-size:15px}
+  .proof{grid-template-columns:repeat(3,1fr);width:100%}
+  .proof div{padding:10px 12px}
+  .proof b{font-size:19px}
+  .dash{padding:12px}
+  .order{grid-template-columns:1fr auto;grid-template-areas:"who st" "what btn";padding:10px}
+  .order .n{display:none}
+  .kpi b{font-size:22px}
+  .chrome span{max-width:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <span class="mark" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span>
+      <span><b>Центр компьютерной помощи</b><small><span class="dot" id="dot"></span><span id="openTxt">Петрозаводск</span></small></span>
+    </a>
+    <nav class="nav">
+      <a class="l" href="#prices">Цены</a>
+      <a class="l" href="#visit">Выезд</a>
+      <a class="l" href="#contacts">Контакты</a>
+      <a class="pill" href="#book">Записаться</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap hero">
+  <div>
+    <span class="kicker"><i>онлайн</i> запись и статус ремонта — прямо на сайте</span>
+    <h1>Цена за 10 секунд. <span>Запись без звонка.</span></h1>
+    <p class="lead">Выберите поломку — сразу видно цену и срок. Удобное время выбираете сами, а как идёт ремонт — смотрите по номеру квитанции.</p>
+    <div class="proof">
+      <div><b>4,8 ★</b><small>55 оценок в 2ГИС</small></div>
+      <div><b>от 1 часа</b><small>мелкий ремонт</small></div>
+      <div><b>выезд</b><small>дом и офис</small></div>
+    </div>
+    <ul class="feat">
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#11a150" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Цену называем до ремонта — без сюрпризов на выдаче</li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#11a150" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Не нужно звонить и спрашивать «ну что там?» — статус обновляется сам</li>
+      <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#11a150" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Восстанавливаем данные: фото, документы, переписки</li>
+    </ul>
+  </div>
+
+  <div class="app" id="book">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="tabBook" aria-selected="true" aria-controls="paneBook">Записаться</button>
+      <button class="tab" role="tab" id="tabTrack" aria-selected="false" aria-controls="paneTrack">Где мой ремонт?</button>
+    </div>
+
+    <div class="pane" id="paneBook" role="tabpanel" aria-labelledby="tabBook">
+      <div class="progress" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <div id="stage"></div>
+    </div>
+
+    <div class="pane" id="paneTrack" role="tabpanel" aria-labelledby="tabTrack" hidden>
+      <div class="q"><h3>Статус по номеру квитанции</h3></div>
+      <form class="find" id="findForm">
+        <input id="findNum" inputmode="numeric" maxlength="6" placeholder="№ квитанции" aria-label="Номер квитанции" autocomplete="off">
+        <button type="submit">Найти</button>
+      </form>
+      <p class="try">Для примера: <button type="button" data-try="2417">2417</button> <button type="button" data-try="2409">2409</button></p>
+      <div id="trackOut" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+
+<section class="admin-sec" id="admin">
+  <div class="wrap">
+    <div class="admin-head">
+      <div>
+        <p class="eyebrow">а это видите вы</p>
+        <h2>Кабинет мастера</h2>
+        <p class="sec-lead">Все заявки с сайта в одном списке. Нажали «дальше» — клиент сразу видит новый статус у себя, а в живой версии ещё и получает сообщение. Звонков «ну что там с моим ноутбуком?» станет меньше.</p>
+      </div>
+      <p class="note">Попробуйте: <b>запишитесь наверху</b> — заявка появится здесь. Двигайте её до «Готово» и проверьте вкладку «Где мой ремонт?».</p>
+    </div>
+    <div class="laptop">
+      <div class="screen">
+        <div class="chrome"><i></i><i></i><i></i><span>кабинет мастера · вход по паролю</span></div>
+        <div class="dash">
+          <div class="kpis">
+            <div class="kpi"><small>Заявок с сайта за неделю</small><b id="kWeek">0</b></div>
+            <div class="kpi"><small>В работе</small><b id="kWork">0</b></div>
+            <div class="kpi"><small>Готово к выдаче</small><b id="kReady">0</b></div>
+            <div class="kpi"><small>Ожидаемая выручка</small><b id="kSum">0 ₽</b></div>
+          </div>
+          <div class="orders" id="orders"></div>
+          <p class="empty">Демо: заявки хранятся только в вашем браузере.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="prices">
+  <div class="wrap">
+    <p class="eyebrow">прайс</p>
+    <h2>Сколько стоит ремонт</h2>
+    <p class="sec-lead">Цена — за работу. Запчасть считаем отдельно и называем до начала ремонта.</p>
+    <div class="prices" id="priceGrid"></div>
+    <p class="pnote">Цены в демо — примеры. В рабочей версии — ваши, меняются за минуту.</p>
+  </div>
+</section>
+
+<section id="visit" style="padding-top:0">
+  <div class="wrap split">
+    <div class="box">
+      <p class="eyebrow">выезд</p>
+      <h3>Не хотите везти — приедем сами</h3>
+      <p>Домой или в офис: компьютеры, ноутбуки, принтеры, Wi-Fi. При записи выберите «Выезд» — и укажите адрес.</p>
+      <ul class="checks">
+        <li>Не включается компьютер</li>
+        <li>Не печатает принтер или МФУ</li>
+        <li>Пропал интернет, не работает Wi-Fi</li>
+        <li>Перенести всё на новый ноутбук</li>
+      </ul>
+    </div>
+    <div class="box" id="contacts">
+      <p class="eyebrow">контакты</p>
+      <h3>Как нас найти</h3>
+      <div class="contact-line"><span>Адрес</span><b>наб. Варкауса, 1а, офис 108<br>1 этаж, левое крыло</b></div>
+      <div class="contact-line"><span>Часы</span><b>пн–пт 9:00–19:00<br>сб–вс по записи</b></div>
+      <div class="contact-line"><span>Телефон</span><b><a href="tel:+79212280348">+7 921 228-03-48</a></b></div>
+      <a class="cta dark" href="https://2gis.ru/petrozavodsk/firm/70000001026933039" target="_blank" rel="noopener">Маршрут в 2ГИС</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">Демо для «Центра компьютерной помощи», Петрозаводск · цены и заявки — примеры · сделано студией «абалдуй»</div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M21.5 4.3 2.9 11.5c-1.3.5-1.2 1.2-.2 1.5l4.8 1.5 1.8 5.6c.2.6.4.8.9.8.4 0 .6-.2.9-.4l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.4zM8.3 14.1l9.2-5.8c.5-.3.8-.1.4.2l-7.6 6.9-.3 3.3z"/></svg></span>
+  <div><b id="toastT">Мастеру в Telegram</b><p id="toastP"></p><small>демо: так придёт уведомление</small></div>
+</div>
+
+<nav class="bar" aria-label="Быстрые действия">
+  <a class="b1" href="tel:+79212280348">Позвонить</a>
+  <a class="b2" href="#book">Записаться</a>
+</nav>
+
+<script>
+// ВСЁ, ЧТО МЕНЯЕТСЯ ПОД КЛИЕНТА, — ЗДЕСЬ. Цены и заявки — примеры для демо.
+const CONFIG = {
+  address: "Петрозаводск, наб. Варкауса, 1а, офис 108",
+  hours: { weekday: [9, 19], weekend: [11, 16] },   // сб–вс по записи
+  slotsWeekday: ["10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00"],
+  slotsWeekend: ["11:00","12:00","13:00","14:00","15:00"],
+  devices: {
+    "Телефон":   { icon: "phone",   sub: "экран, батарея, вода",   list: [["Разбит экран",1000,"от 1 часа"],["Быстро садится батарея",700,"от 1 часа"],["Не заряжается",900,"1 день"],["Упал в воду",900,"1–2 дня"],["Восстановить фото и контакты",1500,"1–2 дня"]] },
+    "Ноутбук":   { icon: "laptop",  sub: "греется, не включается", list: [["Греется и шумит",1500,"1 день"],["Не включается",500,"диагностика 1 день"],["Разбит экран",1500,"1–3 дня"],["Залил клавиатуру",1000,"1–2 дня"],["Тормозит, переустановить Windows",1200,"1 день"]] },
+    "Компьютер": { icon: "pc",      sub: "вирусы, апгрейд",        list: [["Не включается",500,"диагностика 1 день"],["Вирусы и реклама",900,"1 день"],["Апгрейд или сборка",1000,"1–2 дня"],["Пропали файлы",1500,"1–3 дня"]] },
+    "Принтер":   { icon: "printer", sub: "не печатает, заправка",  list: [["Не печатает",800,"1 день"],["Заправить картридж",400,"от 1 часа"],["Мнёт, застревает бумага",900,"1 день"]] }
+  },
+  statuses: [
+    ["Принят", "Устройство у нас, заявка в работе"],
+    ["Диагностика", "Ищем причину, называем точную цену"],
+    ["Ждём запчасть", "Заказали деталь, обычно 1–3 дня"],
+    ["Ремонт", "Мастер чинит"],
+    ["Готово", "Можно забирать"]
+  ]
+};
+
+const ICONS = {
+  phone:   '<rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M11 18.5h2"/>',
+  laptop:  '<rect x="4" y="4.5" width="16" height="11" rx="1.6"/><path d="M2 19.5h20"/>',
+  pc:      '<rect x="3" y="3.5" width="18" height="12" rx="1.6"/><path d="M9 20.5h6M12 15.5v5"/>',
+  printer: '<path d="M7 8V3.5h10V8"/><rect x="3" y="8" width="18" height="8" rx="1.6"/><path d="M7 13.5h10v7H7z"/>'
+};
+const icon = (k, c="#0f1729") => `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[k]}</svg>`;
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const rub = n => n.toLocaleString("ru-RU").replace(/ /g, " ") + " ₽";
+const WD = ["вс","пн","вт","ср","чт","пт","сб"];
+const MON = ["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+
+/* ---------- хранилище (демо: только этот браузер) ---------- */
+const KEY = "f1help-demo-v2";
+function seed(){
+  const d = n => { const x = new Date(); x.setDate(x.getDate() - n); return x.toISOString(); };
+  return [
+    { n: 2409, name: "Андрей",       phone: "+7 921 ••• •• 14", dev: "Ноутбук",   prob: "Греется и шумит",    price: 1500, when: "сдал 17 ноября",  st: 2, at: d(3) },
+    { n: 2417, name: "Марина",       phone: "+7 911 ••• •• 52", dev: "Телефон",   prob: "Разбит экран",       price: 1000, when: "сдала 18 ноября", st: 4, at: d(2) },
+    { n: 2425, name: "Офис на Ленина", phone: "+7 814 ••• •• 30", dev: "Принтер", prob: "Не печатает", price: 800, when: "выезд, вчера", st: 1, at: d(1), visit: true },
+    { n: 2428, name: "Ирина",        phone: "+7 953 ••• •• 07", dev: "Компьютер", prob: "Вирусы и реклама",   price: 900,  when: "сегодня 10:00",   st: 0, at: d(0) }
+  ];
+}
+let mem = null;
+function load(){
+  if (mem) return mem;
+  try { const s = localStorage.getItem(KEY); mem = s ? JSON.parse(s) : seed(); } catch(e){ mem = seed(); }
+  return mem;
+}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(mem)); } catch(e){} }
+const orders = () => load();
+
+/* ---------- часы работы ---------- */
+function setOpen(){
+  const d = new Date(), h = d.getHours() + d.getMinutes()/60, wd = d.getDay();
+  const weekend = wd === 0 || wd === 6;
+  const [o, c] = weekend ? CONFIG.hours.weekend : CONFIG.hours.weekday;
+  const open = !weekend && h >= o && h < c;
+  $("#dot").classList.toggle("off", !open);
+  $("#openTxt").textContent = open ? `Открыто до ${c}:00` : (weekend ? "Сегодня по записи" : `Откроемся в ${o}:00`);
+}
+
+/* ---------- запись: шаги ---------- */
+const B = { dev: null, prob: null, price: 0, time: "", day: null, slot: null, visit: false };
+let step = 0;
+function prog(){ document.querySelectorAll(".progress span").forEach((s,i) => s.classList.toggle("on", i <= step)); }
+
+function stepDevice(){
+  step = 0; prog();
+  $("#stage").innerHTML = `<div class="q"><h3>Что сломалось?</h3></div><div class="tiles">${
+    Object.entries(CONFIG.devices).map(([k,v]) => `<button class="tile" data-dev="${k}">${icon(v.icon)}<span>${k}<small>${v.sub}</small></span></button>`).join("")
+  }</div><p class="hint">4 шага · меньше минуты</p>`;
+  $("#stage").querySelectorAll("[data-dev]").forEach(b => b.onclick = () => { B.dev = b.dataset.dev; stepProblem(); });
+}
+function stepProblem(){
+  step = 1; prog();
+  const list = CONFIG.devices[B.dev].list;
+  $("#stage").innerHTML = `<div class="q"><h3>${B.dev}: что случилось?</h3><button data-back>назад</button></div><div class="list">${
+    list.map(([p,price,t],i) => `<button class="row" data-i="${i}"><b>${p}<small>срок ${t}</small></b><span>от ${rub(price)}</span></button>`).join("")
+  }</div><p class="hint">Цена за работу. Не нашли свою поломку — выберите похожую, уточним на месте.</p>`;
+  $("[data-back]").onclick = stepDevice;
+  $("#stage").querySelectorAll("[data-i]").forEach(b => b.onclick = () => { const [p,price,t] = list[+b.dataset.i]; Object.assign(B, {prob:p, price, time:t}); stepTime(); });
+}
+function days(){
+  const out = [], now = new Date();
+  for (let i = 0; out.length < 7; i++){ const d = new Date(now); d.setDate(now.getDate() + i); d.setHours(0,0,0,0); out.push(d); }
+  return out;
+}
+function slotsFor(d){
+  const we = d.getDay() === 0 || d.getDay() === 6;
+  const base = we ? CONFIG.slotsWeekend : CONFIG.slotsWeekday;
+  const now = new Date(), today = d.toDateString() === now.toDateString();
+  return base.map((s,i) => {
+    const h = parseInt(s, 10);
+    const past = today && h <= now.getHours();
+    const busy = ((d.getDate() * 7 + i * 5 + d.getMonth()) % 4 === 0);   // занятые — для вида
+    return { s, off: past || busy };
+  });
+}
+function stepTime(){
+  step = 2; prog();
+  const ds = days();
+  if (!B.day || !ds.some(d => d.getTime() === B.day.getTime())) B.day = ds.find(d => slotsFor(d).some(x => !x.off)) || ds[1];
+  const label = d => d.toDateString() === new Date().toDateString() ? "сегодня" : WD[d.getDay()];
+  $("#stage").innerHTML = `<div class="sum"><span>${esc(B.dev)} · ${esc(B.prob.toLowerCase())}</span><b>от ${rub(B.price)}</b></div>
+    <div class="q"><h3>Когда удобно?</h3><button data-back>назад</button></div>
+    <div class="days" role="group" aria-label="День">${ds.map((d,i) => `<button class="day" data-d="${i}" aria-pressed="${d.getTime()===B.day.getTime()}"><small>${label(d)}</small><b>${d.getDate()}</b></button>`).join("")}</div>
+    <div class="slots" id="slots" role="group" aria-label="Время"></div>
+    <div class="where" role="group" aria-label="Где чиним">
+      <button data-w="0" aria-pressed="${!B.visit}">Привезу сам</button>
+      <button data-w="1" aria-pressed="${B.visit}">Выезд мастера</button>
+    </div>
+    <button class="cta" id="toContacts" style="margin-top:16px" ${B.slot ? "" : "disabled"}>Дальше</button>`;
+  const drawSlots = () => {
+    $("#slots").innerHTML = slotsFor(B.day).map(x => `<button class="slot" data-s="${x.s}" ${x.off ? "disabled" : ""} aria-pressed="${B.slot===x.s}">${x.s}</button>`).join("");
+    $("#slots").querySelectorAll(".slot").forEach(b => b.onclick = () => { B.slot = b.dataset.s; drawSlots(); $("#toContacts").disabled = false; });
+  };
+  drawSlots();
+  $("[data-back]").onclick = stepProblem;
+  $("#stage").querySelectorAll("[data-d]").forEach(b => b.onclick = () => {
+    B.day = ds[+b.dataset.d]; B.slot = null; $("#toContacts").disabled = true;
+    $("#stage").querySelectorAll("[data-d]").forEach(x => x.setAttribute("aria-pressed", x === b)); drawSlots();
+  });
+  $("#stage").querySelectorAll("[data-w]").forEach(b => b.onclick = () => {
+    B.visit = b.dataset.w === "1"; $("#stage").querySelectorAll("[data-w]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  });
+  $("#toContacts").onclick = stepContacts;
+}
+function whenText(){ return `${B.day.getDate()} ${MON[B.day.getMonth()]}, ${B.slot}`; }
+function fmtPhone(v){
+  let d = v.replace(/\D/g, ""); if (d[0] === "8") d = "7" + d.slice(1); if (d[0] !== "7") d = "7" + d; d = d.slice(0, 11);
+  const p = [d.slice(1,4), d.slice(4,7), d.slice(7,9), d.slice(9,11)];
+  let s = "+7"; if (p[0]) s += " (" + p[0]; if (p[0].length === 3) s += ")"; if (p[1]) s += " " + p[1]; if (p[2]) s += "-" + p[2]; if (p[3]) s += "-" + p[3];
+  return s;
+}
+function stepContacts(){
+  step = 3; prog();
+  $("#stage").innerHTML = `<div class="sum"><span>${esc(whenText())}${B.visit ? " · выезд" : ""}</span><b>от ${rub(B.price)}</b></div>
+    <div class="q"><h3>Как с вами связаться?</h3><button data-back>назад</button></div>
+    <form id="cform" novalidate>
+      <div class="field"><label for="fName">Имя</label><input id="fName" autocomplete="given-name" placeholder="Как к вам обращаться"></div>
+      <div class="field"><label for="fPhone">Телефон</label><input id="fPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
+      ${B.visit ? `<div class="field"><label for="fAddr">Адрес для выезда</label><input id="fAddr" autocomplete="street-address" placeholder="Улица, дом, квартира или офис"></div>` : ""}
+      <div class="field"><label for="fModel">Модель (если знаете)</label><input id="fModel" placeholder="Например, iPhone 12 или Lenovo IdeaPad"></div>
+      <label class="agree"><input type="checkbox" id="fOk">Согласен на обработку персональных данных для записи на ремонт</label>
+      <p class="err" id="err"></p>
+      <button class="cta" type="submit">Записаться на ${esc(B.slot)}</button>
+    </form>`;
+  $("[data-back]").onclick = stepTime;
+  const ph = $("#fPhone");
+  ph.addEventListener("focus", () => { if (!ph.value) ph.value = "+7 "; });
+  ph.addEventListener("input", () => { ph.value = fmtPhone(ph.value); });
+  $("#cform").onsubmit = e => {
+    e.preventDefault();
+    const name = $("#fName").value.trim(), digits = ph.value.replace(/\D/g, ""), addr = $("#fAddr") ? $("#fAddr").value.trim() : "";
+    let msg = "";
+    $("#fName").setAttribute("aria-invalid", !name); ph.setAttribute("aria-invalid", digits.length !== 11);
+    if ($("#fAddr")) $("#fAddr").setAttribute("aria-invalid", !addr);
+    if (!name) msg = "Напишите имя"; else if (digits.length !== 11) msg = "Проверьте телефон"; else if ($("#fAddr") && !addr) msg = "Укажите адрес для выезда"; else if (!$("#fOk").checked) msg = "Нужно согласие на обработку данных";
+    $("#err").textContent = msg; if (msg) return;
+    const list = orders();
+    const n = Math.max(...list.map(o => o.n)) + 1 + Math.floor(Math.random() * 3);
+    const o = { n, name, phone: ph.value, dev: B.dev, prob: B.prob, price: B.price, when: whenText() + (B.visit ? " · выезд" : ""), st: 0, at: new Date().toISOString(), mine: true, visit: B.visit, model: $("#fModel").value.trim(), slotISO: slotDate().toISOString() };
+    list.push(o); save(); renderAdmin(n);
+    done(o);
+    toast("Новая заявка с сайта", `№ ${n} · ${o.dev}, ${o.prob.toLowerCase()} · ${o.when} · ${o.name}, ${o.phone}`);
+  };
+}
+function slotDate(){ const d = new Date(B.day); const [h,m] = B.slot.split(":"); d.setHours(+h, +m, 0, 0); return d; }
+function done(o){
+  step = 3; prog();
+  $("#stage").innerHTML = `<div class="receipt">
+      <p class="ok"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Вы записаны</p>
+      <div class="numrow"><div><small class="mono" style="color:var(--mute)">КВИТАНЦИЯ</small><div class="big-num mono">№ ${o.n}</div></div><small style="color:var(--mute);text-align:right">по номеру видно<br>статус ремонта</small></div>
+      <dl>
+        <dt>Когда</dt><dd>${esc(o.when)}</dd>
+        <dt>Что</dt><dd>${esc(o.dev)}, ${esc(o.prob.toLowerCase())}</dd>
+        <dt>Цена</dt><dd>от ${rub(o.price)} + запчасть</dd>
+        <dt>Где</dt><dd>${o.visit ? "приедем к вам" : "наб. Варкауса, 1а, оф. 108"}</dd>
+      </dl>
+    </div>
+    <div class="btns">
+      <button class="ghost" id="ics">В календарь</button>
+      <button class="ghost" id="goTrack">Статус ремонта</button>
+    </div>
+    <button class="cta dark" id="goAdmin" style="margin-top:8px">Посмотреть глазами мастера ↓</button>
+    <p class="hint"><button style="border:0;background:none;color:var(--mute);text-decoration:underline;cursor:pointer;font-size:12px" id="again">записать ещё одно устройство</button></p>`;
+  $("#ics").onclick = () => ics(o);
+  $("#goTrack").onclick = () => { selectTab("track"); $("#findNum").value = o.n; showTrack(o.n); };
+  $("#goAdmin").onclick = () => document.getElementById("admin").scrollIntoView({ behavior: "smooth" });
+  $("#again").onclick = () => { Object.assign(B, { dev:null, prob:null, slot:null, visit:false }); stepDevice(); };
+}
+function ics(o){
+  const s = new Date(o.slotISO), e = new Date(s.getTime() + 30*60000);
+  const f = d => d.getFullYear() + String(d.getMonth()+1).padStart(2,"0") + String(d.getDate()).padStart(2,"0") + "T" + String(d.getHours()).padStart(2,"0") + String(d.getMinutes()).padStart(2,"0") + "00";
+  const txt = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//f1help//demo//RU","BEGIN:VEVENT",`UID:${o.n}@f1help-demo`,`DTSTART:${f(s)}`,`DTEND:${f(e)}`,
+    `SUMMARY:Ремонт: ${o.dev.toLowerCase()} (квитанция № ${o.n})`,`LOCATION:${o.visit ? "Выезд мастера" : CONFIG.address}`,`DESCRIPTION:${o.prob}. Телефон: +7 921 228-03-48`,"END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([txt], { type: "text/calendar" })); a.download = `remont-${o.n}.ics`;
+  document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+
+/* ---------- статус ---------- */
+function showTrack(num){
+  const o = orders().find(x => x.n === +num);
+  const out = $("#trackOut");
+  if (!o){ out.innerHTML = `<p class="track sub" style="margin-top:16px;color:var(--mute)">Квитанция № ${esc(num)} не найдена. Проверьте номер — он есть в СМС и на бумажной квитанции.</p>`; return; }
+  out.innerHTML = `<div class="track"><h4>${esc(o.dev)}: ${esc(o.prob.toLowerCase())}</h4><p class="sub">Квитанция № ${o.n} · ${esc(o.when)} · от ${rub(o.price)}</p>
+    <ol class="steps">${CONFIG.statuses.map(([t,d],i) => `<li class="${i < o.st ? "done" : i === o.st ? (o.st === 4 ? "done" : "now") : "todo"}"><span class="b">${i < o.st || o.st === 4 && i === 4 ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>' : ""}</span><div><b>${t}</b>${i === o.st ? `<small>${d}</small>` : ""}</div></li>`).join("")}</ol>
+    ${o.st === 4 ? `<p class="ready">Готово! Забрать можно в часы работы: наб. Варкауса, 1а, офис 108. Возьмите квитанцию или назовите номер.</p>` : ""}</div>`;
+}
+$("#findForm").onsubmit = e => { e.preventDefault(); const v = $("#findNum").value.replace(/\D/g, ""); if (v) showTrack(v); };
+document.querySelectorAll("[data-try]").forEach(b => b.onclick = () => { $("#findNum").value = b.dataset.try; showTrack(b.dataset.try); });
+$("#findNum").addEventListener("input", e => { e.target.value = e.target.value.replace(/\D/g, ""); });
+
+/* ---------- вкладки ---------- */
+function selectTab(which){
+  const book = which === "book";
+  $("#tabBook").setAttribute("aria-selected", book); $("#tabTrack").setAttribute("aria-selected", !book);
+  $("#paneBook").hidden = !book; $("#paneTrack").hidden = book;
+}
+$("#tabBook").onclick = () => selectTab("book");
+$("#tabTrack").onclick = () => selectTab("track");
+
+/* ---------- кабинет мастера ---------- */
+function renderAdmin(fresh){
+  const list = orders().slice().sort((a,b) => b.n - a.n);
+  $("#orders").innerHTML = list.map(o => `<div class="order${o.n === fresh ? " new" : ""}" data-n="${o.n}">
+      <span class="n">№${o.n}</span>
+      <span class="who">${esc(o.name)}${o.mine ? '<span class="tag-new">ВЫ</span>' : ""}<small>${esc(o.phone)}</small></span>
+      <span class="what">${esc(o.dev)}<small>${esc(o.prob)}${o.model ? " · " + esc(o.model) : ""} · ${esc(o.when)}</small></span>
+      <span class="st"><span class="badge s${o.st}">${CONFIG.statuses[o.st][0]}</span></span>
+      <span class="act"><button class="next" data-next="${o.n}" ${o.st === 4 ? "disabled" : ""}>${o.st === 4 ? "Готово ✓" : "Дальше →"}</button></span>
+    </div>`).join("");
+  $("#orders").querySelectorAll("[data-next]").forEach(b => b.onclick = () => {
+    const o = orders().find(x => x.n === +b.dataset.next); if (!o || o.st >= 4) return;
+    o.st = (o.st === 1 && o.prob.match(/Вирус|Заправ|переустан/i)) ? 3 : o.st + 1;
+    save(); renderAdmin();
+    const [t] = CONFIG.statuses[o.st];
+    toast(o.st === 4 ? "Клиенту ушло СМС" : "Статус обновлён", o.st === 4 ? `«${o.name}, ваш ${o.dev.toLowerCase()} готов! Квитанция № ${o.n}. Ждём вас пн–пт 9–19»` : `№ ${o.n} → ${t}. Клиент видит это на сайте`);
+    if ($("#findNum").value === String(o.n)) showTrack(o.n);
+  });
+  const weekAgo = Date.now() - 7*864e5;
+  $("#kWeek").textContent = list.filter(o => new Date(o.at).getTime() >= weekAgo).length;
+  $("#kWork").textContent = list.filter(o => o.st < 4).length;
+  $("#kReady").textContent = list.filter(o => o.st === 4).length;
+  $("#kSum").textContent = rub(list.reduce((s,o) => s + o.price, 0));
+}
+
+/* ---------- прайс ---------- */
+$("#priceGrid").innerHTML = Object.entries(CONFIG.devices).map(([k,v]) => `<div class="pcard"><h3>${icon(v.icon)}${k}</h3><ul>${v.list.map(([p,price,t]) => `<li>${p}<span>от ${rub(price)}</span></li>`).join("")}</ul></div>`).join("");
+
+/* ---------- уведомление ---------- */
+let tt;
+function toast(t, p){ $("#toastT").textContent = t; $("#toastP").textContent = p; $("#toast").classList.add("show"); clearTimeout(tt); tt = setTimeout(() => $("#toast").classList.remove("show"), 4200); }
+
+setOpen(); stepDevice(); renderAdmin();
+</script>
+</body>
+</html>
